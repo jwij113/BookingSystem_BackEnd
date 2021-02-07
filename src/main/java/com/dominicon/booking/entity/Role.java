@@ -8,12 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Role {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String role;
 	
@@ -23,6 +23,7 @@ public class Role {
 	public String getRole() {
 		return role;
 	}
+	
 	public void setRole(String role) {
 		this.role = role;
 	}

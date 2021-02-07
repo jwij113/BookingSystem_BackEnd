@@ -2,6 +2,7 @@ package com.dominicon.booking.entity;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,17 +13,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class SystemUser {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE ,generator = "system_user_generator")
+	@SequenceGenerator(name="system_user_generator", sequenceName = "system_user_seq")
 	private Long id;
 	private String firstName;
 	private String lastName;
 	private String password;
+	
+	@Column(unique=true)
 	private String email;
+	
+	private String sessionID;
 	
 	@ManyToMany(targetEntity=Role.class, fetch = FetchType.EAGER)
 	@JoinTable(
@@ -34,6 +41,9 @@ public class SystemUser {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "booker", targetEntity = Booking.class)
 	private List<Booking> bookings;
+	
+	public SystemUser() {
+	}
  
 	public SystemUser(String firstName, String lastName) {
 		this.firstName = firstName;
@@ -60,11 +70,11 @@ public class SystemUser {
 		this.lastName = lastName;
 	}
 
-	public String getPassword() {
+	public String grabPassword() {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void putPassword(String password) {
 		this.password = password;
 	}
 
@@ -82,6 +92,14 @@ public class SystemUser {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
+	}
+
+	public String getSessionID() {
+		return sessionID;
+	}
+
+	public void setSessionID(String sessionID) {
+		this.sessionID = sessionID;
 	}
 
 }
