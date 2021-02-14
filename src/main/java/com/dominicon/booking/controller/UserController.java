@@ -44,6 +44,29 @@ class UserController {
 		return false;
 	}
 	
+	@PostMapping("/user/isadmin")
+	boolean isAdmin(@RequestBody String sessionID){
+		
+		SystemUser userRow = repository.findBySessionID(sessionID);
+				
+		if (userRow.getRoles() == null) return false;
+		
+		for (Role role : userRow.getRoles()) {
+			if (role.getRole().equals("admin"))
+				return true;
+		}
+		
+		return false;
+	}
+	
+	@GetMapping("/user/sessionID/{sessionID}")
+	SystemUser userBySessionID(@PathVariable String sessionID){
+		
+		SystemUser userRow = repository.findBySessionID(sessionID);
+				
+		return userRow;
+	}
+	
 	@PostMapping("/user/login")
 	Map<String,String> login(@RequestBody Map<String, String> loginInputForm) {
 		

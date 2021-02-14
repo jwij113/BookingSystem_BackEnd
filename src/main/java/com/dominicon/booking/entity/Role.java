@@ -17,7 +17,7 @@ public class Role {
 	private Long id;
 	private String role;
 	
-	@ManyToMany(targetEntity=SystemUser.class, mappedBy="roles", fetch = FetchType.LAZY)
+	@ManyToMany(targetEntity=SystemUser.class, mappedBy="roles", fetch = FetchType.EAGER)
 	private List<SystemUser> users;
 	
 	public String getRole() {
@@ -27,5 +27,10 @@ public class Role {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public List<SystemUser> fetchUsers(){
+		return users;
+	}
+
 
 }

@@ -8,5 +8,7 @@ import com.dominicon.booking.entity.SystemUser;
 public interface UserRepository extends JpaRepository<SystemUser, Long> {
 	
 	SystemUser findByEmail(String email);
+	
+	SystemUser findBySessionID(String sessionID);
 
 }

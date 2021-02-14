@@ -29,7 +29,6 @@ class UsertControllerTest {
 	
 	@Test
 	public void testLoginUserFoundPasswordFalse() {
-		
 		Map<String, String> loginToken = Map.of("email","jokowi@gmail.com", "password", "joko");
 		Map<String, String> response = controller.login(loginToken);
 		assertThat(response.get("success").equals("false")).isEqualTo(true);
