@@ -55,5 +55,13 @@ public class Booking {
 	public void setBookingMessage(String bookingMessage) {
 		this.bookingMessage = bookingMessage;
 	}
+	
+	public String isAvailable() {
+		if (this.owner != null && this.booker == null) {
+			return "Available";
+		}
+		
+		return "";
+	}
 
 }
